@@ -51,8 +51,8 @@ class OrderController {
   ResponseEntity<EntityModel<Order>> newOrder(@RequestBody Order order) {
     order.setStatus(Status.IN_PROGRESS);
     Order newOrder = orderRepository.save(order);
-    return ResponseEntity //
-        .created(linkTo(methodOn(OrderController.class).one(newOrder.getId())).toUri()) //
+    return ResponseEntity 
+        .created(linkTo(methodOn(OrderController.class).one(newOrder.getId())).toUri()) 
         .body(assembler.toModel(newOrder));
   }
   
@@ -65,11 +65,11 @@ class OrderController {
       return ResponseEntity.ok(assembler.toModel(orderRepository.save(order)));
     }
 
-    return ResponseEntity //
-        .status(HttpStatus.METHOD_NOT_ALLOWED) //
-        .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE) //
-        .body(Problem.create() //
-            .withTitle("Method not allowed") //
+    return ResponseEntity 
+        .status(HttpStatus.METHOD_NOT_ALLOWED) 
+        .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE) 
+        .body(Problem.create() 
+            .withTitle("Method not allowed") 
             .withDetail("You can't complete an order that is in the " + order.getStatus() + " status"));
   }
   
@@ -82,11 +82,11 @@ class OrderController {
       return ResponseEntity.ok(assembler.toModel(orderRepository.save(order)));
     }
 
-    return ResponseEntity //
-        .status(HttpStatus.METHOD_NOT_ALLOWED) //
-        .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE) //
-        .body(Problem.create() //
-            .withTitle("Method not allowed") //
+    return ResponseEntity 
+        .status(HttpStatus.METHOD_NOT_ALLOWED) 
+        .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE) 
+        .body(Problem.create() 
+            .withTitle("Method not allowed") 
             .withDetail("You can't cancel an order that is in the " + order.getStatus() + " status"));
   }
   
